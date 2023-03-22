@@ -29,8 +29,8 @@ fn remove_non_printing_char(string: String) -> PyResult<String> {
 #[pyfunction]
 fn validate_modulus_10(number: String)->PyResult<bool> {
 
-    // zero-based position of a digit in the `number`
-    let mut index:i32=number.len() as i32-1;
+    // controls whether a digit have to be doubled
+    let mut index:i32=-1;
     
     // accrues the sum of all digits of the `number`
     let mut total:i32=0;
@@ -59,9 +59,9 @@ fn validate_modulus_10(number: String)->PyResult<bool> {
             // character is not a valid digit
             None => return Ok(false),
         };
-        index -= 1;
+        index += 1;
     }
-    
+
     // if the result of modulus is 0 then the number is valid
     if total % 10 == 0{
         return Ok(true)
